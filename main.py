@@ -35,10 +35,11 @@ def load_movies():
 # Cargamos las películas al iniciar la API para no leer el archivo cada vez que alguien pregunte por ellas.
 movies_list = load_movies()
 
-# Función para encontrar sinónimos de una palabra
+# Función para encontrar sinónimos de una palabra (word)
 def get_synonyms(word):
     # Usamos WordNet para obtener distintas palabras que significan lo mismo.
     return{lemma.name().lower() for syn in wordnet.synsets(word) for lemma in syn.lemmas()}
+
 
 
 
