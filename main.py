@@ -59,6 +59,16 @@ def get_movies():
     # Si hay películas, las enviamos, si no, mostramos un error
     return movies_list or HTTPException(status_code=500, detail="No hay datos de películas disponibles")
 
+# Ruta para obtener una película específica según su ID
+@app.get('/movies/{id}', tag=['Movies'])
+def get_movie(id : str):
+    # Buscamos en la lista de películas la que tenga el mismo ID
+    return next((m for m in movies_list if m ['id'] == id), {"detalle": "película no encontrada"})
+
+
+
+
+
 
 
 
