@@ -25,7 +25,7 @@ except Exception as e:
 
 def load_movies():
     # Leemos el archivo que contiene información de películas y seleccionamos las columnas más importantes
-    df = pd.read_csv('./dataset/netflix_titles.csv')[['show_id','title','realease_year','listed_in','description','rating']]
+    df = pd.read_csv('./dataset/netflix_titles.csv')[['show_id','title','release_year','listed_in','description','rating']]
 
     # Renombramos las columnas para que sean más faciles de entender.
     df.columns = ['id','title','year','category','rating','overview']
@@ -34,6 +34,12 @@ def load_movies():
 
 # Cargamos las películas al iniciar la API para no leer el archivo cada vez que alguien pregunte por ellas.
 movies_list = load_movies()
+
+# Función para encontrar sinónimos de una palabra
+def get_synonyms(word):
+    # Usamos WordNet para obtener distintas palabras que significan lo mismo.
+    return{lemma.name().lower() for syn in wordnet.synsets(word) for lemma in syn.lemmas()}
+
 
 
 
