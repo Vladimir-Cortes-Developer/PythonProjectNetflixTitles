@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d9d6cde9-3e43-4c48-ab33-ff6b7835a6c0" name="Changes" comment="feat(backend): add main.py with the function get_synonyms(word)" />
+    <list default="true" id="d9d6cde9-3e43-4c48-ab33-ff6b7835a6c0" name="Changes" comment="feat(backend): add main.py with FastAPI and home()">
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -87,7 +89,7 @@
       <workItem from="1747270650453" duration="5558000" />
       <workItem from="1747320392993" duration="51000" />
       <workItem from="1747320755993" duration="534000" />
-      <workItem from="1747346107488" duration="5694000" />
+      <workItem from="1747346107488" duration="6280000" />
     </task>
     <task id="LOCAL-00001" summary="feat(backend): add main.py with load_movies()">
       <option name="closed" value="true" />
@@ -113,7 +115,15 @@
       <option name="project" value="LOCAL" />
       <updated>1747352153765</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="feat(backend): add main.py with FastAPI and home()">
+      <option name="closed" value="true" />
+      <created>1747352712330</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1747352712330</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -123,11 +133,12 @@
     <MESSAGE value="feat(backend): add main.py with load_movies()" />
     <MESSAGE value="feat(backend): add refactor main.py in the function load_movies()" />
     <MESSAGE value="feat(backend): add main.py with the function get_synonyms(word)" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(backend): add main.py with the function get_synonyms(word)" />
+    <MESSAGE value="feat(backend): add main.py with FastAPI and home()" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(backend): add main.py with FastAPI and home()" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/PythonProjectNetflixTitles$eda2.coverage" NAME="eda2 Coverage Results" MODIFIED="1747272746382" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/PythonProjectNetflixTitles$main.coverage" NAME="main Coverage Results" MODIFIED="1747351943171" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/PythonProjectNetflixTitles$main.coverage" NAME="main Coverage Results" MODIFIED="1747352616663" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/PythonProjectNetflixTitles$eda3.coverage" NAME="eda3 Coverage Results" MODIFIED="1747275698578" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/eda" />
     <SUITE FILE_PATH="coverage/PythonProjectNetflixTitles$eda.coverage" NAME="eda Coverage Results" MODIFIED="1747276317334" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/eda" />
   </component>

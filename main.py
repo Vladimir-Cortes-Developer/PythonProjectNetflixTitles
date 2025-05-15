@@ -45,11 +45,21 @@ def get_synonyms(word):
 app = FastAPI(title="Mi aplicación de Películas", versión="1.0.0")
 
 # Ruta de inicio: Cuando alguien entra a la API sin especificar nada, verá un mensaje de bienvenda
-
 @app.get('/', tags=['Home'])
 def home():
 # Cuando entremos en el navegador a http://127.0.0.1:8000/ veremos un mensaje de bienvenida.
     return HTMLResponse('<h1>Bienvenido a la API de Películas</h1>')
+
+# Obteniendo la lista de películas
+# Creamos una ruta para obtener todas las películas
+# Ruta para obtener todas las películas disponibles
+
+@app.get('/movies', tags=['Movies'])
+def get_movies():
+    # Si hay películas, las enviamos, si no, mostramos un error
+    return movies_list or HTTPException(status_code=500, detail="No hay datos de películas disponibles")
+
+
 
 
 
