@@ -15,11 +15,12 @@ import nltk # NLTK es una librería para procesar texto y analizar palabras.
 from nltk.tokenize import word_tokenize # Se usa para dividir un texto en palabras individuales.
 from nltk.corpus import wordnet # Nos ayuda a encontrar sinonimos de palabras.
 
-# Configuración de NLTK
+
+# Configuración de NLTK - Descargamos los recursos necesarios
 try:
-    nltk.data.path.append(r"C:\Users\User001\PycharmProjects\Talentotech2\PythonProjectNetflixTitles\.venv\nltk_data")
-    nltk.download("punkt", download_dir=nltk.data.path[0], quiet=True)
-    nltk.download("wordnet", download_dir=nltk.data.path[0], quiet=True)
+    # Descargamos directamente sin especificar ruta para evitar problemas
+    nltk.download('punkt')
+    nltk.download('wordnet')
 except Exception as e:
     print(f"Error al configurar NLTK: {e}")
 
@@ -37,8 +38,11 @@ movies_list = load_movies()
 
 # Función para encontrar sinónimos de una palabra (word)
 def get_synonyms(word):
-    # Usamos WordNet para obtener distintas palabras que significan lo mismo.
-    return{lemma.name().lower() for syn in wordnet.synsets(word) for lemma in syn.lemmas()}
+    synonyms = set()
+    for syn in wordnet.synsets(word):
+        for lemma in syn.lemmas():
+            synonyms.add(lemma.name().lower())
+    return synonyms
 
 # Creamos la aplicación FastAPI, que será el motor de nuestra API
 # Esto inicializa la API con un nombre y una versión
@@ -63,30 +67,36 @@ def get_movies():
 @app.get('/movies/{id}', tags=['Movies'])
 def get_movie(id : str):
     # Buscamos en la lista de películas la que tenga el mismo ID
-    return next((m for m in movies_list if m ['id'] == id), {"detalle": "película no encontrada"})
+    return next((m for m in movies_list if m['id'] == id), {"detalle": "película no encontrada"})
 
 # Ruta del chatbot que responde con películas según palabras clave de la categoría
-@app.get('/chatbot', tags=['Chatbot'])
-def chatbot(query : str):
-    # Dividimos la consulta en palabras clave, para entender mejor la intención del usuario.
-    query_words = word_tokenize(query.lower())
-    # Buscamos sinónimos de las palabras clave para ampliar la búsqueda
+@app.get("/chatbot", tags=["Chatbot"])
+def chatbot(query: str):
+    try:
+        # Intentamos tokenizar con word_tokenize
+        query_words = word_tokenize(query.lower())
+    except LookupError:
+        # Si falla, usamos un método más simple
+        query_words = query.lower().split()
+
+    # Obtenemos sinónimos para cada palabra
     synonyms = {word for q in query_words for word in get_synonyms(q)} | set(query_words)
-    # Filtramos la lista de películas buscando coincidencias en la categoría.
-    results = [m for m in movies_list if any (s in m ['category'].lower() for s in synonyms)]
-    # Si encontramos películas, enviamos la lista; si no, mostramos un mensaje de que no se encontraron coincidencias
-    return JSONResponse (content={
-        "respuesta": "Aquí tienes algunas películas relacionadas."
-        if results
-        else "No encontré películas en esa categoria.",
+
+    # Validamos que la película tenga categoría y buscamos coincidencias
+    results = [m for m in movies_list if any(s in m["title"].lower() for s in synonyms)]
+
+    return JSONResponse(content={
+        "respuesta": "Aquí tienes algunas películas relacionadas." if results else "No encontré películas en esa categoría.",
         "películas": results
     })
 
+
+
 # Ruta para buscar películas por categoría específica
-@app.get ('/movies/', tags=[ 'Movies'])
+@app.get ('/movies/by_category/', tags=[ 'Movies'])
 def get_movies_by_category( category: str):
     # Filtramos la lista de películas según la categoría ingresada
-    return [m for m in movies_list if category.lower () in m['category'] .lower()]
+    return [m for m in movies_list if category.lower() in m['category'] .lower()]
 
 
 
