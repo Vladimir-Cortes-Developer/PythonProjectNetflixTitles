@@ -60,10 +60,29 @@ def get_movies():
     return movies_list or HTTPException(status_code=500, detail="No hay datos de películas disponibles")
 
 # Ruta para obtener una película específica según su ID
-@app.get('/movies/{id}', tag=['Movies'])
+@app.get('/movies/{id}', tags=['Movies'])
 def get_movie(id : str):
     # Buscamos en la lista de películas la que tenga el mismo ID
     return next((m for m in movies_list if m ['id'] == id), {"detalle": "película no encontrada"})
+
+# Ruta del chatbot que responde con películas según palabras clave de la categoría
+@app.get('/chatbot', tags=['Chatbot'])
+def chatbot(query : str):
+    # Dividimos la consulta en palabras clave, para entender mejor la intención del usuario.
+    query_words = word_tokenize(query.lower())
+    # Buscamos sinónimos de las palabras clave para ampliar la búsqueda
+    synonyms = {word for q in query_words for word in get_synonyms(q)} | set(query_words)
+    # Filtramos la lista de películas buscando coincidencias en la categoría.
+    results = [m for m in movies_list if any (s in m ['category'].lower() for s in synonyms)]
+    # Si encontramos películas, enviamos la lista; si no, mostramos un mensaje de que no se encontraron coincidencias
+    return JSONResponse (content={
+        "respuesta": "Aquí tienes algunas películas relacionadas."
+        if results
+        else "No encontré películas en esa categoria.",
+        "películas": results
+    })
+
+
 
 
 
